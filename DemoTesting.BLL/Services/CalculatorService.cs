@@ -24,6 +24,11 @@ namespace DemoTesting.BLL.Services
 
         public double Division(double nb1, double nb2)
         {
+            if (nb2 == 0)
+            {
+                throw new CalculatorDivisionPerZeroException();
+            }
+
             return Math.Round(nb1 / nb2, 3);
         }
 
@@ -46,7 +51,7 @@ namespace DemoTesting.BLL.Services
         public double Substraction(double nb1, double nb2)
         {
             throw new NotImplementedException();
-        } 
+        }
         #endregion
     }
 }

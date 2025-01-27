@@ -104,9 +104,8 @@ namespace DemoTesting.BLL.Test.Services
 
         [Theory]
         [InlineData(10.9, 2.3, 4.739)] 
-        [InlineData(-5.45, 6.8, -0.802)]
-        [InlineData(8.44, -7.412, -1.139
-            )]
+        [InlineData(-5.45, 6.8, -0.801)]
+        [InlineData(8.44, -7.412, -1.139)]
         [InlineData(-2.12, -13.984, 0.152)]
         public void Division_TwoReal_Ok(double val1, double val2, double expected)
         {
@@ -117,7 +116,19 @@ namespace DemoTesting.BLL.Test.Services
             Assert.Equal(expected, actual);
         }
 
+        [Fact]
+        public void Division_Zero()
+        {
+            ICalculatorService service = GetCalculatorService();
 
+            const double val1 = 4.5;
+            const double val2 = 0;
+
+            Assert.Throws<CalculatorDivisionPerZeroException>(() =>
+            {
+                service.Division(val1, val2);
+            });
+        }
 
         #endregion
 

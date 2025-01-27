@@ -11,4 +11,8 @@
         public CalculatorOverflowException() : base("Overflow detected !") { }
     }
 
+    public class CalculatorDivisionPerZeroException : CalculatorException
+    {
+        public CalculatorDivisionPerZeroException() : base("Division per zero detected !") { }
+    }
 }
