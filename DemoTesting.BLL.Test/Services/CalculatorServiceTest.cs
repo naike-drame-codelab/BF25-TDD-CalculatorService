@@ -28,11 +28,11 @@ namespace DemoTesting.BLL.Test.Services
             const int expected = 7;
 
             // Action 
-            int actual = service.Addition(val1,val2);
+            int actual = service.Addition(val1, val2);
 
             // Assert
             Assert.Equal(expected, actual);
-        }  
+        }
 
         [Fact]
         public void Addition_TwoReal_Ok()
@@ -44,11 +44,11 @@ namespace DemoTesting.BLL.Test.Services
             const double expected = 1.2;
 
             // Action 
-            double actual = service.Addition(val1,val2);
+            double actual = service.Addition(val1, val2);
 
             // Assert
             Assert.Equal(expected, actual);
-        } 
+        }
 
         [Fact]
         public void Addition_TwoReal_BugPrecision_IEEE754()
@@ -60,7 +60,7 @@ namespace DemoTesting.BLL.Test.Services
             const double expected = 0.3;
 
             // Action 
-            double actual = service.Addition(val1,val2);
+            double actual = service.Addition(val1, val2);
 
             // Assert
             Assert.Equal(expected, actual);
@@ -88,30 +88,34 @@ namespace DemoTesting.BLL.Test.Services
         #endregion
 
         #region Division
-        [Fact]
-        public void Division_TwoInteger_Ok()
+        public static IEnumerable<object[]> valuesForDivisionTest = new List<object[]>
+        {
+            new object[] {5, 2, 2.5 },
+            new object[] {20, 100, 0.2 },
+            new object[] {50, 2, 25 }
+        };
+
+        [Theory]
+        [MemberData(nameof(valuesForDivisionTest))]
+        public void Division_TwoInteger_Ok(int val1, int val2, double expected)
         {
             ICalculatorService service = GetCalculatorService();
-           
-            const int val1 = 5;
-            const int val2 = 2;
-            const double expected = 2.5;
 
-            double actual = service.Division(val1,val2);
+            double actual = service.Division(val1, val2);
 
             Assert.Equal(expected, actual);
         }
 
         [Theory]
-        [InlineData(10.9, 2.3, 4.739)] 
+        [InlineData(10.9, 2.3, 4.739)]
         [InlineData(-5.45, 6.8, -0.801)]
         [InlineData(8.44, -7.412, -1.139)]
         [InlineData(-2.12, -13.984, 0.152)]
         public void Division_TwoReal_Ok(double val1, double val2, double expected)
         {
             ICalculatorService service = GetCalculatorService();
-           
-            double actual = service.Division(val1,val2);
+
+            double actual = service.Division(val1, val2);
 
             Assert.Equal(expected, actual);
         }
